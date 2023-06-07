@@ -1,0 +1,39 @@
+
+
+
+table{
+    margin: 0 auto;
+    margin-top: 50px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    font-family: Popins, sans-serif;
+    font-size: 15px;
+}
+
+caption{
+    font-weight: 550;
+    font-size: 20px;
+    text-align: left;
+    padding: 10px;
+}
+
+table, th, td{
+    border-collapse: collapse;
+}
+
+th, td{
+    padding: 8px;
+    text-align: center;
+}
+
+th{
+    color: #3D035D;
+    background-color: #fce0fc;
+    padding: 12px;
+}
+
+td:nth-child(even){
+    background-color: #f8f8f8;
+}
+td:nth-child(odd){
+    background-color: #eeeeee;
+}

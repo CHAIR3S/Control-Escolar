@@ -1,0 +1,66 @@
+<div class="body">
+    <app-display></app-display>
+</div>
+<div [ngClass]="this.alumnoService._res ? 'sidebar' : 'active'">
+    <div class="logo_content">
+        <div class="logo">
+            <i class='bx bxs-user-circle'></i>
+            <div class="logo_name">
+                Control Escolar
+            </div>
+        </div>
+            <i class='bx bx-menu' id="btn" (click)="this.alumnoService.changeRes()"></i>
+        
+    </div>
+    <ul class="nav_list">
+        <li>
+            <a href="init/home/6">
+                <i class='bx bxs-home'></i>
+                <span class="links_name"> Inicio </span>
+            </a>
+            <span class="react"> Inicio </span>
+        </li>
+        <li>
+            <a href="init/admin">
+                <i class='bx bx-chalkboard'></i>
+                <span class="links_name"> Administración </span>
+            </a>
+            <span class="react"> Administración </span>
+        </li>
+        <li>
+            <a href="init/profesores">
+                <i class='bx bx-clipboard'></i>
+                <span class="links_name"> Profesores </span>
+            </a>
+            <span class="react"> Profesores </span>
+        </li>
+        <!-- <li>
+            <a href="#">
+                <i class='bx bxs-user-plus'></i>
+                <span class="links_name"> Registrar </span>
+            </a>
+            <span class="react"> Registrar </span>
+        </li> -->
+    </ul>
+    <div class="profile_content">
+        <div class="profile">
+            <div class="profile_details">
+
+                <img src="assets/Image mia.jpg" alt="">
+
+                <div class="name_role">
+                    <div class="name">
+                        {{alumnoService.nombreUsuario}}
+                    </div>
+                    <div class="role">
+                        Web Designer
+                    </div>
+                </div>
+                <i class='bx bx-log-out' id="logout"></i>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

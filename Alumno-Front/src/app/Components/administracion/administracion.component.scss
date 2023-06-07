@@ -1,0 +1,76 @@
+table {
+  width: 100%;
+
+  font-family: "Poppins", sans-serif;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 25%;
+}
+
+td,
+th {
+  width: 0;
+}
+
+.busqueda-filtro{
+  width: 95%;
+}
+
+i{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.spinner{
+  display: flex;
+  justify-content: center;
+  margin-top: 120px;
+}
+
+
+#clear{
+  font-size: 25px;
+}
+
+#mostrar-todos{
+  font-size: 12px;
+  background-color: purple;
+  color: white;
+  width: 80%;
+  
+}
+
+.buttons{
+  height: 55%;
+  margin-bottom: 22px;
+}
+
+#add{
+  background-color: #0098c0;
+  color: white; 
+  font-size: 35px;
+  width: 70%;
+}
+
+.tools{
+  font-size: 25px;
+  font-weight: 100;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+#edit{
+  color: #0098c0;
+}
+
+#trash{
+  color: #ed0017;
+}
+

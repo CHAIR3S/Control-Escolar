@@ -1,0 +1,49 @@
+<table>
+    <caption>Calificaciones del semestre</caption>
+    <tr class="tableHead">
+        <th>
+            Clave
+        </th>
+        <th>
+            Ciclo
+        </th>
+        <th>
+            Materia
+        </th>
+        <th>
+            Cal. I
+        </th>
+        <th>
+            Cal. II
+        </th>
+        <th>
+            Cal. III
+        </th>
+        <th>
+            Promedio
+        </th>
+    </tr>
+    <tr *ngFor = "let Calificacion of calificionesList">
+        <td>
+            {{Calificacion.materia.clave}}
+        </td>
+        <td>
+            {{Calificacion.materia.ciclo.periodo.periodo}}
+        </td>
+        <td>
+            {{Calificacion.materia.nombre}}
+        </td>
+        <td>
+            {{Calificacion.cal1}}
+        </td>
+        <td>
+            {{Calificacion.cal2}}
+        </td>
+        <td>
+            {{Calificacion.cal3}}
+        </td>
+        <td>
+            {{Calificacion.promedio}}
+        </td>
+    </tr>
+</table>

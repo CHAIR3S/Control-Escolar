@@ -1,0 +1,142 @@
+<div class="filtro">
+  <h1>Filtro de busqueda</h1>
+
+  <mat-grid-list cols="11" rowHeight="90px">
+    <form [formGroup]="form" (ngSubmit)="consultarAlumno()">
+      <mat-grid-tile [colspan]="2" [rowspan]="1" id='expediente'>
+        <mat-form-field appearance="outline" class="busqueda-filtro">
+          <mat-label>Expediente</mat-label>
+          <input
+            matInput
+            autocomplete="off"
+            type="text"
+            (keyup)="onTextKeyup($event)"
+            formControlName="expediente"
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <mat-form-field appearance="outline" class="busqueda-filtro" >
+          <mat-label>Correo</mat-label>
+          <input matInput autocomplete="off" formControlName="correo" placeholder="ittiva@example.com"/>
+          <mat-error *ngIf="form.invalid">Correo no válido</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <mat-form-field appearance="outline" class="busqueda-filtro">
+          <mat-label>CURP</mat-label>
+          <input matInput autocomplete="off" formControlName="curp" type="text"
+          (keyup)="onTextKeyup($event)"/>
+        </mat-form-field>
+      </mat-grid-tile>
+      
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <button
+        mat-raised-button
+        id="buscar"
+        class="buttons"
+        matTooltip="Buscar alumno"
+        matTooltipPosition="above"
+        type="submit"
+        >
+        <i class="bx bx-search"></i>
+      </button>
+    </mat-grid-tile>
+  </form>  
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <button
+          mat-raised-button
+          color="warn"
+          id="clear"
+          class="buttons"
+          matTooltip="Borrar filtro de búsqueda"
+          matTooltipPosition="above"
+          (click)="resetForm()"
+        >
+          <i class="bx bx-x-circle"></i>
+        </button>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1"> </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <button mat-raised-button id="mostrar-todos" class="buttons" (click)="consultarTodosAlumnos()">
+          Mostrar todos
+        </button>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <button mat-raised-button id="add" class="buttons" matTooltip="Añadir alumno"
+        matTooltipPosition="above" (click)="add()">
+          <i class="bx bx-user-plus"></i>
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  
+</div>
+
+<div class="spinner" *ngIf="load">
+  <mat-spinner mode="indeterminate"></mat-spinner>
+</div>
+
+<div class="mat-elevation-z8" *ngIf="this.alumnoService.alumnoArray.length > 0">
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="expediente">
+      <th mat-header-cell *matHeaderCellDef>Expediente</th>
+      <td mat-cell *matCellDef="let row">{{ row.expediente }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="alumno">
+      <th mat-header-cell *matHeaderCellDef>Alumno</th>
+      <td mat-cell *matCellDef="let row">{{ row.alumno }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="estatus">
+      <th mat-header-cell *matHeaderCellDef>Estatus</th>
+      <td mat-cell *matCellDef="let row">{{ row.estatus }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="grupo">
+      <th mat-header-cell *matHeaderCellDef>Grupo</th>
+      <td mat-cell *matCellDef="let row">{{ row.grupo }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row; let i = index">
+        <span>
+          <i class='bx bx-search-alt tools' id="look"
+          matTooltip="Ver alumno"
+          matTooltipPosition="above"></i>
+        </span>
+        <span>
+          <i class='bx bx-edit tools' id="edit"
+          matTooltip="Editar alumno"
+          matTooltipPosition="above"
+          (click)="editarAlumno(row.id)"></i>
+        </span>
+        <span>
+          <i class='bx bx-trash tools' id="trash"
+          matTooltip="Eliminar alumno"
+          matTooltipPosition="above"
+          (click)="borrarAlumnoDialog(row.id)"></i>
+        </span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+</div>
+
+<div *ngIf="this.alumnoService.alumnoArray.length == 0; ">
+  <h1 *ngIf="!load">No hay usuarios para mostrar</h1>
+</div>
+
+
+

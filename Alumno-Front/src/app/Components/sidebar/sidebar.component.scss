@@ -1,0 +1,233 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:wght@200;300;400;500;600;700&display=swap);
+*{
+    margin: 0;
+    padding: 0%;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+} 
+
+.body{
+    display: grid;
+    background-color: #fce0fc;
+}
+
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 240px;
+    background: purple;
+    padding: 10px 14px;
+    transition: 0.4s ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border-top-right-radius: 5px;
+    
+    font-family: "Poppins", sans-serif;
+}
+
+.active{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 70px;
+    background: purple;
+    padding: 10px 14px;
+    transition: 0.5s ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border-top-right-radius: 5px;
+}
+
+ .logo_content .logo {
+    color: white;
+    display: flex;
+    align-items: center;
+    width: 150;
+    height: 200;
+    opacity: 1;
+    pointer-events: none;
+    transition: all 1.9s ease;
+}
+
+.active .logo_content .logo {
+    opacity: 0;
+    transition: 0.2s ease;
+    pointer-events: none;
+}
+
+.logo_content .logo i{
+    font-size: 35px;
+    margin-right: 6px;
+}
+
+.logo_content .logo .logo_name {
+
+    font-size: 20px;
+    font-weight: 300;
+}
+
+ #btn {
+    position: absolute;
+    color: white;
+    left: 85%;
+    top: 17px;
+    font-size: 30px;
+    height: 27px;
+    width: 45px;
+    text-align: center;
+    line-height: 25px;
+    transform: translateX(-20%);
+    cursor: pointer;
+}
+
+.active #btn {
+    left: 30%;
+}
+
+ ul{
+    margin-top: 70px;
+}
+
+ ul li{
+    position: relative;
+    list-style: none;
+    height: 55px;
+    width: 100%;
+    font-weight: 500;
+    margin: 0 px;
+    line-height: 50px;
+}
+
+ ul li .react{
+    position: absolute;
+    top: 0;
+    height: 35px;
+    width: 122px;
+    left: 122px;
+    line-height: 35px;
+    text-align: center;
+    transform: translateY(-50%);
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0s;
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+}
+
+.active ul li .react{
+    display: block;
+    transform: translate(-50%, -70%);
+}
+
+ ul li:hover .react{ 
+    top: 50%;
+    opacity: 1;
+    transition: all 0.5s ease;
+}
+
+ul li a{
+    color: white;
+    align-items: center;
+    display: flex;
+    text-decoration: none;
+    transition: all .4s ease;
+    border-radius: 12px;
+}
+
+ul li a:hover{
+    color: purple;
+    background: rgb(255, 255, 255);
+    pointer-events: auto;
+}
+
+.active ul li .links_name {
+    display: none;
+    pointer-events: none;
+}
+
+
+ul li a i{
+    font-weight: 200;
+    margin: 10px;
+    height: 20px;
+    min-width: 50px;
+    border-radius: 12px;
+    line-height: 18px;
+    text-align: center;
+    font-size: 25px;
+}
+
+.active ul li a i{
+    text-align: initial;
+}
+
+.profile_content{
+    position: absolute;
+    bottom: 0;
+    font-size: 17px;
+    color: white;
+    left: 0;
+    width: 100%;
+}
+
+.profile_content .profile{
+    position: relative;
+    padding: 9px 6px;
+    height: 60px;
+    width: 100%;
+    background: rgb(90, 1, 90);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.profile_content .profile .profile_details{
+    display: flex;
+    align-items: center;
+    opacity: 1;
+    pointer-events: auto;
+    white-space: nowrap;
+}
+
+.active .profile_content .profile .profile_details{
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.profile_content .profile .profile_details img{
+    height: 45px;
+    width: 45px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.profile .profile_details .name_role{
+    margin-left: 10px;
+}
+
+.profile .profile_details .name_role .name{
+    font-size: 17px;
+    font-weight: 400;
+    color: white;
+}
+
+.profile .profile_details .name_role .role{
+    font-size: 13px;
+}
+
+#logout{
+    position: absolute;
+    bottom: 3px;
+    left: 88%;
+    transform: translateX(-15px);
+    line-height: 50px;
+    font-size: 25px;
+    border-radius: 12%;
+}
+
+.active #logout{
+    visibility: visible;
+    left: 50%;
+}
