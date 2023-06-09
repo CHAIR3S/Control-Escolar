@@ -23,6 +23,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InterfaceRoutingModule } from './Components/interface-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MensajeBorrarComponent } from './Components/mensaje-borrar/mensaje-borrar.component';
+import { ClickOutDirective } from './Directive/click-out.directive';
+
 
 
 @NgModule({
@@ -33,7 +36,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     AdministracionComponent,
     MateriasTablaComponent,
     TablaProfesoresComponent,
-    DisplayComponent],
+    DisplayComponent,
+    MensajeBorrarComponent,
+    ClickOutDirective],
   imports: [
     BrowserModule,
     HttpClientModule,

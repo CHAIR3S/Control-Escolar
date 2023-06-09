@@ -1,5 +1,5 @@
 <div class="filtro">
-  <h1>Filtro de busqueda</h1>
+  <h2 >Filtro de busqueda</h2>
 
   <mat-grid-list cols="11" rowHeight="90px">
     <form [formGroup]="form" (ngSubmit)="consultarAlumno()">
@@ -135,7 +135,7 @@
 </div>
 
 <div *ngIf="this.alumnoService.alumnoArray.length == 0; ">
-  <h1 *ngIf="!load">No hay usuarios para mostrar</h1>
+  <h2 *ngIf="!load">No hay usuarios para mostrar</h2>
 </div>
 
 

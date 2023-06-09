@@ -15,7 +15,5 @@ export class DisplayComponent{
   ) {  
   }
 
-  sendEvent(){
-    this.alumnoService.sendEvent();
-  }
+
 }
