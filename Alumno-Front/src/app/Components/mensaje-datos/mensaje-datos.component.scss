@@ -1,0 +1,45 @@
+
+.delimit{
+    width: 600px;
+    margin: 0;
+    padding: 0;
+}
+
+.info-alumno{
+    border: 4px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.5);
+    padding-bottom: 10px;
+}
+
+:host ::ng-deep .mat-grid-tile-content { //selector especial que permite a los estilos "profundizar" en los componentes hijos
+    
+    justify-content: left;
+    padding: 10px;
+}
+
+.circle-container{
+    border-radius: 50%;
+    margin-left: 50px;
+    padding: 5px;
+}
+
+#image{
+    font-size: 150px;
+}
+
+.circle-container:hover{
+    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.5);
+    transition-property: box-shadow;
+    transition-duration: 500ms;
+}
+
+.property{
+    margin-right: 3px;
+    font-weight: 700;
+}
+
+button{
+    margin-left: 100px;
+}
+

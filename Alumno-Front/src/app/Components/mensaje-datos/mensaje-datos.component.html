@@ -1,0 +1,60 @@
+<app-modal>
+  <div class="delimit">
+
+    <h2>Datos de alumno {{ alumno.nombre }} {{ alumno.apePaterno }}</h2>
+
+    <div class="info-alumno">
+
+      <mat-grid-list cols="2" rowHeight="60px" id="grid">
+
+        <mat-grid-tile [colspan]="1" [rowspan]="1" class="info-container">
+          <span class="property">Apellido paterno:</span>
+          {{ alumno.apePaterno }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="4">
+          <div class="circle-container">
+            <i id="image" class="bx bx-user-circle"></i>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1" class="info-container">
+          <span class="property">Apellido materno: </span>
+          {{ alumno.apeMaterno }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1" class="info-container">
+          <span class="property">Nombre: </span>
+          {{ alumno.nombre }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1" class="info-container">
+          <span class="property">Correo: </span>
+          {{ alumno.correo }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1" class="info-container">
+          <span class="property">Curp: </span>
+          {{ alumno.curp }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1" class="info-container">
+          <span class="property">Expediente: </span>
+          {{ alumno.expediente }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1" class="info-container">
+          <span class="property">Grupo: </span>
+            {{ alumno.grupo.grupo }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1" class="info-container">
+          <span class="property">Género: </span>
+            {{ alumno.genero }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1" class="info-container">
+          <span class="property">Estatus: </span>
+            {{ alumno.estatus.estatus }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1" >
+          <button mat-raised-button color="primary" (click)="copiarInfo()">Copiar</button>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+
+    </div>
+
+  </div>
+</app-modal>

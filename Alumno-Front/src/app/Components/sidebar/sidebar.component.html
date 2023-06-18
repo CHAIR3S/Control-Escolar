@@ -1,6 +1,7 @@
 <div class="body">
     <app-display></app-display>
 </div>
+
 <div [ngClass]="this.alumnoService._res ? 'sidebar' : 'active'">
     <div class="logo_content">
         <div class="logo">
@@ -12,7 +13,7 @@
             <i class='bx bx-menu' id="btn" (click)="this.alumnoService.changeRes()"></i>
         
     </div>
-    <ul class="nav_list">
+    <ul [ngClass]="this.alumnoService._res ? 'nav-list' : 'nav-list-active'">
         <li>
             <a href="init/home/6">
                 <i class='bx bxs-home'></i>

@@ -1,13 +1,22 @@
-<div [ngClass]="this.alumnoService.dialog ? 'dialog-container-visible' : 'dialog-container-invisible'" >
-  <div class="dialog-content" appClickOut (clickedOutside)="clickedOut()">
-    <h1>¿Estás seguro de eliminar a este usuario?</h1>
-    <i class='bx bx-user-x'></i>
+
+<app-modal>
+  <div class="delimit">
+    <h2>¿Estás seguro de eliminar a este usuario?</h2>
+    <i class="bx bx-user-x"></i>
     <p>Se eliminará permanentemente de la base de datos</p>
     <div>
       <span>
-        <button mat-raised-button color="primary" (click)="sendEvent()">Aceptar</button>
-        <button mat-raised-button color="warn" (click)="this.alumnoService.dialog = false">Cancelar</button>
+        <button mat-raised-button color="primary" (click)="sendEvent()">
+          Aceptar
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="this.alumnoService.dialog = false"
+        >
+          Cancelar
+        </button>
       </span>
     </div>
   </div>
-</div>
+</app-modal>

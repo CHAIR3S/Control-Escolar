@@ -1,59 +1,31 @@
 
-
-.dialog-container-visible{
-    display: flex;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    min-height: 100%;
-    background-color: rgba(79, 79, 79, .7);
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-    visibility: visible;
-    transition-property: background-color;
-    transition-duration: 2000ms;
-    transition-timing-function: ease;
-}
-
-.dialog-container-invisible{
-    z-index: -1;
-    visibility: hidden;
-    height: 0px;
-    width: 0px;
-}
-
-
-.dialog-content{
-    background-color: white;
+.delimit{
     width: 280px;
-    height: auto;
-    text-align: center;
-    padding: 20px;
-    border: solid 8px white;
-    border-radius: 10px;
+    margin: 0;
+    padding: 0;
 }
 
-.dialog-content h1{
+
+h2{
     font-weight: bold;
+    font-size: 30px;
 }
 
-.dialog-content p{
+p{
     font-size: 18px;
     margin-top: 10px;
 }
 
-.dialog-content i{
+i{
     font-size: 70px;
     padding: 10px;
 }
 
-.dialog-content div{
+div{
     margin-top: 39px;
 }
 
-.dialog-content button{
+button{
     margin-left: 20px;
     margin-right: 20px;
 }

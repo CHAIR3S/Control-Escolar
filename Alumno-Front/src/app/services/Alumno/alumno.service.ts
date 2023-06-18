@@ -20,6 +20,7 @@ export class AlumnoService {
   _res: boolean;
   arrayParams: Array<string> = new Array();
   dialog: boolean = false;
+  alumnoDialog: boolean = false;
   idAlumno: number = 0;
   alumno: Alumno = new Alumno();
   subject = new Subject<any>();
@@ -27,6 +28,7 @@ export class AlumnoService {
   arrayAlumnos: Alumno[] = new Array();
   guardarEditar= new Subject<any>();
   editOrUpdate: boolean = false;
+  textoCopiado: boolean = false;
 
   constructor(private http:HttpClient) {
     const storedData = localStorage.getItem('res');

@@ -25,6 +25,10 @@ import { InterfaceRoutingModule } from './Components/interface-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MensajeBorrarComponent } from './Components/mensaje-borrar/mensaje-borrar.component';
 import { ClickOutDirective } from './Directive/click-out.directive';
+import { ModalComponent } from './Components/modal/modal.component';
+import { MensajeDatosComponent } from './Components/mensaje-datos/mensaje-datos.component'; 
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { SnackBarComponent } from './Components/snack-bar/snack-bar.component'; 
 
 
 
@@ -38,7 +42,10 @@ import { ClickOutDirective } from './Directive/click-out.directive';
     TablaProfesoresComponent,
     DisplayComponent,
     MensajeBorrarComponent,
-    ClickOutDirective],
+    ClickOutDirective,
+    ModalComponent,
+    MensajeDatosComponent,
+    SnackBarComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -55,7 +62,8 @@ import { ClickOutDirective } from './Directive/click-out.directive';
     ReactiveFormsModule,
     InterfaceRoutingModule,
     MatProgressSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

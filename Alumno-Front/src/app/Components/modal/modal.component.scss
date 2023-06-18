@@ -1,0 +1,35 @@
+
+.dialog-container-visible{
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    background-color: rgba(79, 79, 79, .7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    visibility: visible;
+    transition-property: background-color;
+    transition-duration: 10000ms;
+    transition-timing-function: ease;
+}
+
+// .dialog-container-invisible{
+//     z-index: -1;
+//     visibility: hidden;
+//     height: 0px;
+//     width: 0px;
+// }
+
+
+.dialog-content{
+    background-color: white;
+    height: auto;
+    width: auto;
+    text-align: center;
+    padding: 20px;
+    border: solid 8px white;
+    border-radius: 10px;
+}

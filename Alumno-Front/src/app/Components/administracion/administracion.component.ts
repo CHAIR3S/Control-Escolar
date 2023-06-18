@@ -92,18 +92,30 @@ export class AdministracionComponent implements OnInit{
   }
 
   editarAlumno(id: number){
-
     
-    let alumno: Alumno[] = this.alumnoService.arrayAlumnos.filter( (arrayAlumnos) => {
-      return arrayAlumnos.id === id;
-    });
-
-    this.alumnoService.alumno = alumno[0];
+    this.filtrarAlumno(id);
 
     this.alumnoService.editOrUpdate = true;
 
     this.router.navigate(['/init/edit']);
 
+  }
+
+  mostrarAlumno(id: number){
+    
+    this.filtrarAlumno(id);
+
+    this.alumnoService.alumnoDialog = true;
+
+  }
+
+  filtrarAlumno(id: number){ //filtra el alumno al que se da click y lo guarda en var alumno de alumnoService
+
+    let alumno: Alumno[] = this.alumnoService.arrayAlumnos.filter( (arrayAlumnos) => {
+      return arrayAlumnos.id === id;
+    });
+
+    this.alumnoService.alumno = alumno[0];
   }
 
   borrarAlumnoArray(userArray: Alumno[], id: number){
