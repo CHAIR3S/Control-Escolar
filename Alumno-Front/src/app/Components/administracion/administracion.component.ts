@@ -58,7 +58,16 @@ export class AdministracionComponent implements OnInit{
   }
 
   ngOnInit(): void {
-      this.consultarGrupos();
+    
+    if(this.grupoService.grupos.length == 0)
+        this.consultarGrupos();
+
+    if(this.alumnoService.loadAlumnos){
+
+      this.consultarTodosAlumnos();
+      this.alumnoService.loadAlumnos = false;
+    }
+
   }
 
   ngAfterViewInit() {
@@ -69,7 +78,7 @@ export class AdministracionComponent implements OnInit{
     event.target.value = event.target.value.toUpperCase();
   }
 
-  aceptarBorrarAlumnoDialog() {
+  aceptarBorrarAlumnoDialog() {  //Despues de recibir el evento se ejecuta funcion para borrar alumno
 
     this.alumnoService.eliminarAlumno(this.idUsuario).subscribe( 
        () => {
@@ -80,13 +89,24 @@ export class AdministracionComponent implements OnInit{
          this.alumnoService.alumnoToArray();
 
          setTimeout( () => {this.dataSource.paginator = this.paginator;}, 5)
+
+         this.alumnoService.snackBarMessage = 'Alumno borrado correctamente';
+
+         this.alumnoService.abrirSnackBar();
+
          
        },
        (error) => {
          console.error(error);
-       }
-    );
 
+         this.alumnoService.snackBarMessage = 'No pudo borrarse el alumno';
+
+         this.alumnoService.abrirSnackBar();
+
+
+       }
+
+    );
     
     this.alumnoService.dialog = false;
   }

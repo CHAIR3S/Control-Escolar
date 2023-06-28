@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { HomeComponent } from './Components/home/home.component';
 import { AdministracionComponent } from './Components/administracion/administracion.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MateriasTablaComponent } from './Components/home/materias-tabla/materias-tabla.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -29,6 +29,9 @@ import { ModalComponent } from './Components/modal/modal.component';
 import { MensajeDatosComponent } from './Components/mensaje-datos/mensaje-datos.component'; 
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { SnackBarComponent } from './Components/snack-bar/snack-bar.component'; 
+import { LoginComponent } from './Components/login/login.component';
+import { CookieService } from 'ngx-cookie-service';
+import { InterceptorService } from './Interceptors/interceptor.service';
 
 
 
@@ -45,7 +48,8 @@ import { SnackBarComponent } from './Components/snack-bar/snack-bar.component';
     ClickOutDirective,
     ModalComponent,
     MensajeDatosComponent,
-    SnackBarComponent],
+    SnackBarComponent,
+    LoginComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -65,7 +69,12 @@ import { SnackBarComponent } from './Components/snack-bar/snack-bar.component';
     BrowserAnimationsModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [CookieService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorService,
+    multi: true //Para que este al pendiente de todas las peticiones
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

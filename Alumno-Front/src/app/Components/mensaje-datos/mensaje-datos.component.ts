@@ -12,8 +12,7 @@ import { SnackBarComponent } from '../../Components/snack-bar/snack-bar.componen
 export class MensajeDatosComponent {
 
   constructor(
-    public alumnoService: AlumnoService,
-    private snackBar: MatSnackBar
+    public alumnoService: AlumnoService
   ){}
 
   alumno: Alumno = this.alumnoService.alumno;
@@ -23,19 +22,19 @@ export class MensajeDatosComponent {
       
       try {
         await navigator.clipboard.writeText(this.elementoCopiado());
-        this.alumnoService.textoCopiado = true;
+        this.alumnoService.snackBarMessage = 'Datos de alumno copiados correctamente';
+        
+        
       } catch (error) {
         console.error(error);
-        this.alumnoService.textoCopiado = false;
+        this.alumnoService.snackBarMessage = 'Datos de alumno no pudieron copiarse';
       }
 
-      this.abrirSnackBar();
+      this.alumnoService.abrirSnackBar();
 
     }
 
-    abrirSnackBar(){ //funcion de snackBar angular material que muestra un componente por determinado tiempo
-      this.snackBar.openFromComponent( SnackBarComponent, { duration: 4000 }); //Recibe de parametros el componente y duracion
-    }
+
 
     elementoCopiado(): string{ //Funcion que pasa objeto alumno a string para usar datos
       

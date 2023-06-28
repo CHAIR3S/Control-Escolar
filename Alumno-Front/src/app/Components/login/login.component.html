@@ -1,0 +1,46 @@
+
+
+<div class="login-container">
+    
+    <div class="image-container">
+        <img src="https://cdn.pixabay.com/photo/2017/02/24/02/37/classroom-2093743_640.jpg" alt="salón de clases">
+    </div>
+
+    <div class="form-container">
+        <img src="http://www.ittiva.com/assets/img/banner-ittiva.png" alt="ittiva logo" id="logo">
+        <h2>Bienvenido a Control Escolar</h2>
+
+
+        <form [formGroup]="form" (ngSubmit)="login()">
+            <div class="input-container">
+    
+                <input type="text"
+                class="input mail" 
+                placeholder="Correo electronico *"
+                formControlName="correo">
+                <i class='bx bxs-envelope icon' id="correo"></i>
+
+                <div *ngIf="form.invalid" id="error-container">
+                    <mat-error id="error">Correo no válido</mat-error>
+                </div>
+            </div>
+            <div [ngClass]="form.invalid ? 'input-container' : ''">
+    
+                <input [attr.type]="tipo" 
+                class="input password" 
+                placeholder="Contraseña *"
+                formControlName="contraseña">
+    
+                <i class='bx bx-hide icon' id="password" (click)="showHidePassword()" *ngIf="this.showPassword"></i>
+    
+                <i class='bx bx-show-alt icon' id="password" (click)="showHidePassword()" *ngIf="!this.showPassword"></i>
+            </div>
+
+
+            <button class="login-button" type="submit" >Iniciar sesión</button>
+
+        </form>
+
+    </div>
+
+</div>

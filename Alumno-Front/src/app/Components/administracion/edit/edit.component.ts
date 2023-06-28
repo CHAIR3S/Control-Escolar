@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { AlumnoService } from 'src/app/services/Alumno/alumno.service';
 import { Alumno } from 'src/app/model/Alumno';
 import { AlumnoAndFiltroDto } from 'src/app/DTO/AlumnoAndFiltroDTO';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -103,14 +104,17 @@ export class EditComponent{
         return grupos.id == Number(alumno.grupo);
       })[0];
 
-      if(this.update)
+      if(this.update){
+
         this.actualizar(alumno);
+        this.alumnoService.alumnoToArray();
+        this.router.navigate(['init/admin']);
+        
+      }
       else
         this.guardar(alumno);
 
-      this.alumnoService.alumnoToArray();
 
-      this.router.navigate(['init/admin']);
 
     }
 
@@ -127,26 +131,51 @@ export class EditComponent{
 
         this.actualizarArreglo(this.alumnoAct);
 
+        this.alumnoService.snackBarMessage = 'Alumno actualizado correctamente';
+
+        this.alumnoService.abrirSnackBar();
+
+
       },
       (error) => {
         console.error(error);
-      });
 
+        this.alumnoService.snackBarMessage = 'No pudo actualizarse alumno';
+
+        this.alumnoService.abrirSnackBar();
+
+      });
 
 
     }
 
     guardar(alumno: AlumnoDto){
 
-      // this.alumnoService.guardarAlumno(alumno).subscribe( ResponseGC => {
-      
-      // },
-      // (error) => {
-      //   console.error(error);
-      // }
-      // );
+      this.alumnoService.guardarAlumno(alumno).subscribe( ResponseGC => {
 
-      this.actualizarArreglo(this.alumnoAct);
+        this.alumnoService.loadAlumnos = true;
+
+        this.alumnoService.snackBarMessage = 'Alumno guardado correctamente';
+
+        this.alumnoService.abrirSnackBar();
+
+        this.router.navigate(['init/admin']);
+
+      
+      },
+      (error) => {
+        console.error(error);
+
+        this.alumnoService.snackBarMessage = 'No pudo guardarse alumno';
+
+        this.alumnoService.abrirSnackBar();
+
+
+      }
+      );
+
+
+      
     }
 
     funcion(): string{
@@ -157,7 +186,7 @@ export class EditComponent{
         return 'Guardar'
     }
 
-    actualizarArreglo(alumno: Alumno){
+    actualizarArreglo(alumno: Alumno){  //Recibe alumno que se actualizo o guardo y lo mete al array para actualizar tabla
       if(this.alumnoService.arrayAlumnos.length > 0){
         if(this.update){
           let contador: number = 0;
@@ -169,12 +198,15 @@ export class EditComponent{
           if(this.alumnoService.arrayAlumnos[contador].id == alumno.id){
             this.alumnoService.arrayAlumnos[contador] = alumno;
           }
+
         }
         else
         {
           this.alumnoService.arrayAlumnos.push(alumno);
-          this.alumnoService.alumnoToArray();
         }
+
+        this.alumnoService.alumnoToArray();
+
       }
     }
 

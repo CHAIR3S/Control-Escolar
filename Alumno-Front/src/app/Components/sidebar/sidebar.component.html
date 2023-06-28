@@ -2,7 +2,7 @@
     <app-display></app-display>
 </div>
 
-<div [ngClass]="this.alumnoService._res ? 'sidebar' : 'active'">
+<div [ngClass]="this.alumnoService._res ? 'sidebar' : 'active'" id="transition">
     <div class="logo_content">
         <div class="logo">
             <i class='bx bxs-user-circle'></i>
@@ -35,13 +35,6 @@
             </a>
             <span class="react"> Profesores </span>
         </li>
-        <!-- <li>
-            <a href="#">
-                <i class='bx bxs-user-plus'></i>
-                <span class="links_name"> Registrar </span>
-            </a>
-            <span class="react"> Registrar </span>
-        </li> -->
     </ul>
     <div class="profile_content">
         <div class="profile">

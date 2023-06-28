@@ -13,7 +13,7 @@ const routes: Routes = [
       {path: 'admin', component: AdministracionComponent},
       {path: 'profesores', component: TablaProfesoresComponent},
       {path: 'edit', component: EditComponent},
-      {path: '**', redirectTo: 'home/:id'}
+      {path: 'init/**', redirectTo: 'home/:id'}
     ]
   }
 ];

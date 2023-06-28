@@ -10,6 +10,8 @@ import { AlumnoData } from '../../model/AlumnoData';
 import { AlumnoFiltroDto } from '../../DTO/AlumnoFiltroDTO';
 import { AlumnoDto } from '../../DTO/AlumnoDTO';
 import { AlumnoAndFiltroDto } from 'src/app/DTO/AlumnoAndFiltroDTO';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarComponent } from 'src/app/Components/snack-bar/snack-bar.component';
 
 @Injectable({
   providedIn: 'root'
@@ -28,11 +30,18 @@ export class AlumnoService {
   arrayAlumnos: Alumno[] = new Array();
   guardarEditar= new Subject<any>();
   editOrUpdate: boolean = false;
-  textoCopiado: boolean = false;
+  snackBarMessage: string = '';
+  loadAlumnos: boolean = false;
 
-  constructor(private http:HttpClient) {
+  constructor(
+    private http:HttpClient,
+    private snackBar: MatSnackBar) {
     const storedData = localStorage.getItem('res');
     this._res = storedData ? JSON.parse(storedData) : true;
+  }
+
+  abrirSnackBar(){ //funcion de snackBar angular material que muestra un componente por determinado tiempo
+    this.snackBar.openFromComponent( SnackBarComponent, { duration: 4000 }); //Recibe de parametros el componente y duracion
   }
 
   changeRes() {
@@ -135,8 +144,10 @@ export class AlumnoService {
 
     const url = "http://localhost:8081/alumno/buscarAlumnoFiltro?" + params; 
                                   //Url y body: objeto que contiene de lo que queremos crear
-    return this.http.get<ResponseGC<Alumno>>(url)
+    return this.http.get<ResponseGC<Alumno>>(url);
   }
+
+
 
   concatenar(filtro: AlumnoFiltroDto){
     let params: string = '';
