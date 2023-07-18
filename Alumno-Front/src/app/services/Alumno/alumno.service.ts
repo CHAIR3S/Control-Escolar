@@ -105,8 +105,12 @@ export class AlumnoService {
     
   }
 
+
   public consultarTodos():Observable<ResponseGC<Alumno>>{
     const url = "http://localhost:8081/alumno/consultarTodos";
+
+    const header = new HttpHeaders().set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG0yQGFkbWluLmVkdS5teCIsImV4cCI6MTY5MjEzOTQ3Niwicm9sIjp7ImlkIjoxLCJyb2wiOiJBZG1pbmlzdHJhZG9yIn19.krt7OdWGjBJi0QCRfh2lbhQXxPRZ69TQO43K4cKtQW8');
+
     
     return this.http.get<ResponseGC<Alumno>>(url,
       {headers: new HttpHeaders().append("Content-Type","application/json")});
@@ -114,9 +118,12 @@ export class AlumnoService {
 
   public consultarAlumnoPorID(idAlumno: number): Observable<ResponseGC<Alumno>> {
     const url = "http://localhost:8081/alumno/buscarAlumnoPorId/" +  idAlumno;
-
-    return this.http.get<ResponseGC<Alumno>>(url);
+  
+    const headers = new HttpHeaders().set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG0yQGFkbWluLmVkdS5teCIsImV4cCI6MTY5MjE0NTAyMCwicm9sIjp7ImlkIjoxLCJyb2wiOiJBZG1pbmlzdHJhZG9yIn19.uryAzenJ1Qcba9aN2LorquSBTyyiHOJ3XpT-huVwudw');
+  
+    return this.http.get<ResponseGC<Alumno>>(url, {headers});
   }
+  
 
   public guardarAlumno(alumno: AlumnoDto): Observable<ResponseGC<Alumno>> {
     const url = "http://localhost:8081/alumno/guardarAlumno"; 

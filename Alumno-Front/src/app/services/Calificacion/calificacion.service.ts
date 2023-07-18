@@ -35,7 +35,10 @@ export class CalificacionService {
   public buscarCalificacionAlumno(idAlumno: number): Observable<ResponseGC<Calificacion>> {
     const url = "http://localhost:8081/calificacion/buscarCalificacionAlumno/" + idAlumno; 
                                   //Url y body: objeto que contiene de lo que queremos crear
-    return this.http.get<ResponseGC<Calificacion>>(url);
+
+    const headers = new HttpHeaders().set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG0yQGFkbWluLmVkdS5teCIsImV4cCI6MTY5MjE0NTAyMCwicm9sIjp7ImlkIjoxLCJyb2wiOiJBZG1pbmlzdHJhZG9yIn19.uryAzenJ1Qcba9aN2LorquSBTyyiHOJ3XpT-huVwudw');
+
+    return this.http.get<ResponseGC<Calificacion>>(url, {headers});
   }
 
 }

@@ -11,16 +11,16 @@
     align-items: center;
     z-index: 1;
     visibility: visible;
-    transition-property: background-color;
-    transition-duration: 10000ms;
-    transition-timing-function: ease;
+    // transition-property: background-color;
+    // transition-duration: 10000ms;
+    // transition-timing-function: ease;
+    // opacity: 1;
+    // transition: opacity 0.5s ease-in-out;
 }
 
 // .dialog-container-invisible{
-//     z-index: -1;
-//     visibility: hidden;
-//     height: 0px;
-//     width: 0px;
+//     opacity: 0;
+//     transition: opacity 0.5s ease-in-out;
 // }
 
 

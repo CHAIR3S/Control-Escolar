@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Credentials } from 'src/app/model/Credentials';
 import { Login } from 'src/app/model/Login';
 import { LoginService } from 'src/app/services/Login/login.service'; 
 
@@ -14,9 +16,11 @@ export class LoginComponent {
   showPassword: boolean = false;
   tipo: string = 'password';
 
+
   constructor(
     private loginService: LoginService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ){
 
 
@@ -26,6 +30,7 @@ export class LoginComponent {
     })
 
   }
+
 
 
   showHidePassword = () => {
@@ -43,16 +48,18 @@ export class LoginComponent {
 
   login() {
 
-    const correo = this.form.value.correo;
-
-    const contraseña = this.form.value.contraseña;
-
+    const creds: Credentials = new Credentials;
+    
+    creds.correo = this.form.value.correo;
+    creds.contraseña = this.form.value.contraseña;
     
 
-    this.loginService.consultarUsuario(correo, contraseña).subscribe(
+    this.loginService.login(creds).subscribe(
       (ResponseGC) => {
 
-        console.log(ResponseGC);
+        console.log(this.form.value);
+
+        this.router.navigate(['init/home']);
         
       },
       (error) => {
