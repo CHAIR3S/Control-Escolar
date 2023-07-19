@@ -237,6 +237,8 @@ ul li a i{
     line-height: 50px;
     font-size: 25px;
     border-radius: 12%;
+    cursor: pointer;
+    pointer-events: auto;
 }
 
 .active #logout{

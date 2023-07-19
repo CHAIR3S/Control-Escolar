@@ -1,3 +1,5 @@
+import { Profesor } from './../../model/Profesor';
+import { Token } from './../../model/Token';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -49,17 +51,46 @@ export class LoginComponent {
   login() {
 
     const creds: Credentials = new Credentials;
+    let id;
     
     creds.correo = this.form.value.correo;
     creds.contraseña = this.form.value.contraseña;
     
 
     this.loginService.login(creds).subscribe(
-      (ResponseGC) => {
+      (response) => {
 
-        console.log(this.form.value);
 
-        this.router.navigate(['init/home']);
+        
+        this.loginService.saveToken(response);
+
+        this.loginService.getCurrentUser().subscribe( 
+          (response) => {
+
+
+            if(response.data.alumno == null){
+
+              id = response.data.profesor.id;
+
+              this.router.navigate([`init/home/${id}`]);
+
+
+            }
+
+            if(response.data.profesor == null){
+
+              id = response.data.alumno.id;
+
+              this.router.navigate([`init/home/${id}`]);
+
+            }
+
+
+        },
+        (error) => {
+
+        });
+
         
       },
       (error) => {
