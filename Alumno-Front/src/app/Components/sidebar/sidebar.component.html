@@ -21,7 +21,7 @@
             </a>
             <span class="react"> Inicio </span>
         </li>
-        <li>
+        <li *appRolPermission="'Administrador'">
             <a href="init/admin">
                 <i class='bx bx-chalkboard'></i>
                 <span class="links_name"> Administración </span>
@@ -43,14 +43,23 @@
                 <img src="assets/Image mia.jpg" alt="">
 
                 <div class="name_role">
-                    <div class="name">
-                        {{alumnoService.nombreUsuario}}
+                    <div *appRolPermission="'alumno'" class="name">
+                        <span>{{this.user.alumno.nombre}}</span>
                     </div>
+                    <div *appRolPermission="'profesor'" class="name">
+                        <span>{{this.user.profesor.nombre}}</span>
+                    </div>
+                    <div *appRolPermission="'administrador'" class="name">
+                        <span>{{this.user.correo}}</span>
+                    </div>
+
                     <div class="role">
-                        Web Designer
+                        {{this.user.rol.rol}}
                     </div>
                 </div>
-                <i class='bx bx-log-out' id="logout" (click)="logout()"></i>
+                <a href="login">
+                    <i class='bx bx-log-out' id="logout" (click)="logout()"></i>
+                </a>
             </div>
 
         </div>

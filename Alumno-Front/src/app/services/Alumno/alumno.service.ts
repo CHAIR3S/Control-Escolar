@@ -116,8 +116,6 @@ export class AlumnoService {
   public consultarAlumnoPorID(idAlumno: number): Observable<ResponseGC<Alumno>> {
     const url = "http://localhost:8081/alumno/buscarAlumnoPorId/" +  idAlumno;
   
-    const headers = new HttpHeaders().set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG0yQGFkbWluLmVkdS5teCIsImV4cCI6MTY5MjE0NTAyMCwicm9sIjp7ImlkIjoxLCJyb2wiOiJBZG1pbmlzdHJhZG9yIn19.uryAzenJ1Qcba9aN2LorquSBTyyiHOJ3XpT-huVwudw');
-  
     return this.http.get<ResponseGC<Alumno>>(url);
   }
   

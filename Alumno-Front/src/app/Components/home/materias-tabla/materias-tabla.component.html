@@ -1,29 +1,31 @@
 <table>
-    <caption>Calificaciones del semestre</caption>
+    <caption caption>Calificaciones del semestre</caption>
+    
     <tr class="tableHead">
-        <th>
+        <th header>
             Clave
         </th>
-        <th>
+        <th header>
             Ciclo
         </th>
-        <th>
+        <th header>
             Materia
         </th>
-        <th>
+        <th header>
             Cal. I
         </th>
-        <th>
+        <th header>
             Cal. II
         </th>
-        <th>
+        <th header>
             Cal. III
         </th>
-        <th>
+        <th header>
             Promedio
-        </th>
+        </th> 
     </tr>
-    <tr *ngFor = "let Calificacion of calificionesList">
+
+    <tr *ngFor = "let Calificacion of calificionesList" content>
         <td>
             {{Calificacion.materia.clave}}
         </td>
@@ -46,4 +48,5 @@
             {{Calificacion.promedio}}
         </td>
     </tr>
+
 </table>

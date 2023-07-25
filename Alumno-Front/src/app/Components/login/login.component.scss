@@ -11,6 +11,11 @@
     background-color: white;
 }
 
+.center{
+    align-items: center;
+    justify-content: center;
+}
+
 .image-container{
     height: 100%;
     width: 55%;
@@ -114,6 +119,13 @@
     box-shadow: 2px 8px 13px -1px rgba(78,97,159,0.47);
     -webkit-box-shadow: 2px 8px 13px -1px rgba(78,97,159,0.47);
     -moz-box-shadow: 2px 8px 13px -1px rgba(78,97,159,0.47);
+}
+
+
+.spinner{
+    background-color: white;
+    position: absolute;
+    height: 100vh;
 }
 
 @media screen and (max-width: 650px) {

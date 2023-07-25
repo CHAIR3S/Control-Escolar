@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginService } from '../services/Login/login.service';
 import { Router } from '@angular/router';
+import { AlumnoService } from '../services/Alumno/alumno.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class InterceptorService implements HttpInterceptor{
 
   constructor(
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private alumnoService: AlumnoService
   ) { }
 
 
@@ -27,11 +29,6 @@ export class InterceptorService implements HttpInterceptor{
 
     }
 
-    if(token == ''){
-      this.router.navigate(['login']);
-    }
-
-    // throw new Error('Method not implemented.');
     return next.handle( authReq );
   }
 }

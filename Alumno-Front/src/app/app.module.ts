@@ -1,5 +1,5 @@
 import { DisplayComponent } from './Components/displayComponents/display/display.component';
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -32,6 +32,10 @@ import { SnackBarComponent } from './Components/snack-bar/snack-bar.component';
 import { LoginComponent } from './Components/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import { InterceptorService } from './Interceptors/interceptor.service';
+import { RolPermissionDirective } from './Directive/rol-permission.directive';
+import { AlumnosDataComponent } from './Components/alumnos-data/alumnos-data.component';
+import { ProfesoresDataComponent } from './Components/profesores-data/profesores-data.component';
+import { LoginGuardian } from './Guadians/login-guardian.guard';
 
 
 
@@ -49,7 +53,11 @@ import { InterceptorService } from './Interceptors/interceptor.service';
     ModalComponent,
     MensajeDatosComponent,
     SnackBarComponent,
-    LoginComponent],
+    LoginComponent,
+    RolPermissionDirective,
+    AlumnosDataComponent,
+    ProfesoresDataComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -74,7 +82,8 @@ import { InterceptorService } from './Interceptors/interceptor.service';
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,
     multi: true //Para que este al pendiente de todas las peticiones
-  }],
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

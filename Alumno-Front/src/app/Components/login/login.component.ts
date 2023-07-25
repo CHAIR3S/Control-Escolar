@@ -1,10 +1,8 @@
-import { Profesor } from './../../model/Profesor';
-import { Token } from './../../model/Token';
-import { Component } from '@angular/core';
+import { AlumnoService } from 'src/app/services/Alumno/alumno.service';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Credentials } from 'src/app/model/Credentials';
-import { Login } from 'src/app/model/Login';
 import { LoginService } from 'src/app/services/Login/login.service'; 
 
 @Component({
@@ -17,12 +15,14 @@ export class LoginComponent {
   form: FormGroup;
   showPassword: boolean = false;
   tipo: string = 'password';
+  load: boolean = false;
 
 
   constructor(
     private loginService: LoginService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private alumnoService: AlumnoService
   ){
 
 
@@ -31,9 +31,20 @@ export class LoginComponent {
       contraseña: ['']
     })
 
+
+    this.load = false;
+
+
+    if(this.loginService.isLoggedIn()){
+
+      let id = this.loginService.getUser()
+
+      // this.load = true;
+      
+      this.router.navigate([`init/home/${id}`]);
+    }
+
   }
-
-
 
   showHidePassword = () => {
     this.showPassword = !this.showPassword
@@ -52,10 +63,10 @@ export class LoginComponent {
 
     const creds: Credentials = new Credentials;
     let id;
+    this.load = true;
     
     creds.correo = this.form.value.correo;
     creds.contraseña = this.form.value.contraseña;
-    
 
     this.loginService.login(creds).subscribe(
       (response) => {
@@ -67,8 +78,10 @@ export class LoginComponent {
         this.loginService.getCurrentUser().subscribe( 
           (response) => {
 
+            this.loginService.saveUser(response.data);
 
-            if(response.data.alumno == null){
+
+            if(response.data.alumno == null){ // If user logged is a teacher
 
               id = response.data.profesor.id;
 
@@ -77,7 +90,7 @@ export class LoginComponent {
 
             }
 
-            if(response.data.profesor == null){
+            if(response.data.profesor == null){ // If user logged is a student
 
               id = response.data.alumno.id;
 
@@ -86,15 +99,28 @@ export class LoginComponent {
             }
 
 
+
+
         },
         (error) => {
+
+          this.load = false;
+
+          this.alumnoService.snackBarMessage = 'Error al iniciar sesión';
+
+          this.alumnoService.abrirSnackBar();
 
         });
 
         
       },
       (error) => {
-        console.error(error);
+
+        this.load = false;
+        
+        this.alumnoService.snackBarMessage = 'Correo o contraseña incorrecta';
+
+        this.alumnoService.abrirSnackBar();
       }
     );
   }
