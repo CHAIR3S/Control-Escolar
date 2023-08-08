@@ -1,5 +1,5 @@
 
-<div *ngIf="mostrar; else cargando">
+<div>
 
     <h2>Bienvenido Alumno</h2>
     
@@ -39,7 +39,7 @@
     </div>
 
     <div class="grades" *ngIf="calificaciones != null; else noMaterias">
-        <app-materias-tabla [calificionesList] = "calificaciones">
+        <app-materias-tabla [calificionesList] = "calificaciones" *ngIf="mostrar">
         </app-materias-tabla>
     </div>
 </div>
@@ -50,8 +50,8 @@
     </div>
 </ng-template>
 
-<ng-template #cargando>
+<!-- <ng-template #cargando>
     <div id="cargando">
         <h1>Cargando...</h1>
     </div>
-</ng-template>
+</ng-template> -->

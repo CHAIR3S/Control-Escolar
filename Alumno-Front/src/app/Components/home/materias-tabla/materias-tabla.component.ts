@@ -1,4 +1,5 @@
 import { Component, OnInit, Input  } from '@angular/core';
+import { Router } from '@angular/router';
 import { Calificacion } from 'src/app/model/Calificacion';
 
 @Component({
@@ -10,7 +11,9 @@ export class MateriasTablaComponent implements OnInit {
 
   @Input() calificionesList: Array<Calificacion> = [];
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
 

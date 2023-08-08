@@ -1,7 +1,7 @@
 import { AlumnoService } from 'src/app/services/Alumno/alumno.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Credentials } from 'src/app/model/Credentials';
 import { LoginService } from 'src/app/services/Login/login.service'; 
 
@@ -16,13 +16,15 @@ export class LoginComponent {
   showPassword: boolean = false;
   tipo: string = 'password';
   load: boolean = false;
+  spinner: boolean = true;
 
 
   constructor(
     private loginService: LoginService,
     private fb: FormBuilder,
     private router: Router,
-    private alumnoService: AlumnoService
+    private alumnoService: AlumnoService,
+    private route: ActivatedRoute
   ){
 
 
@@ -33,21 +35,27 @@ export class LoginComponent {
 
 
     this.load = false;
+    this.spinner = true;
 
 
-    if(this.loginService.isLoggedIn()){
 
-      let id = this.loginService.getUser()
+    // if(this.loginService.isLoggedIn()){
 
-      // this.load = true;
+    //   let id = this.loginService.getUser()
+
+    //   // this.load = true;
       
-      this.router.navigate([`init/home/${id}`]);
-    }
+    //   this.router.navigate([`init/home/${id}`]);
+    // }
 
   }
 
   showHidePassword = () => {
     this.showPassword = !this.showPassword
+
+    // console.log(location.pathname.toString());
+    // console.log(this.router.url);
+
 
     switch(this.tipo){
       case 'password':
@@ -62,7 +70,7 @@ export class LoginComponent {
   login() {
 
     const creds: Credentials = new Credentials;
-    let id;
+    let id: number;
     this.load = true;
     
     creds.correo = this.form.value.correo;
@@ -80,25 +88,9 @@ export class LoginComponent {
 
             this.loginService.saveUser(response.data);
 
+            this.spinner = false;
 
-            if(response.data.alumno == null){ // If user logged is a teacher
-
-              id = response.data.profesor.id;
-
-              this.router.navigate([`init/home/${id}`]);
-
-
-            }
-
-            if(response.data.profesor == null){ // If user logged is a student
-
-              id = response.data.alumno.id;
-
-              this.router.navigate([`init/home/${id}`]);
-
-            }
-
-
+            location.assign('/init/home');
 
 
         },

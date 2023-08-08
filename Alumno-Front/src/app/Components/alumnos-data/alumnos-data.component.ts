@@ -17,6 +17,7 @@ export class AlumnosDataComponent implements OnInit{
 
   response: ResponseGC<Alumno> = new ResponseGC();
   calificaciones: Array <Calificacion> = new Array;
+  storageCalificacion: any;
   alumno: Alumno = new Alumno;
   nombre: String = '';
   mostrar: boolean = false;
@@ -25,39 +26,31 @@ export class AlumnosDataComponent implements OnInit{
 
 
   constructor(
-    private route:ActivatedRoute,
     public alumnoService: AlumnoService,
     private calificacionService: CalificacionService,
-    private loginService: LoginService) { }
+    private loginService: LoginService) {
+
+     }
 
   ngOnInit(): void {
-    
-    this.route.paramMap.subscribe( (paramMap: any) => {
-      let idAlumno: number;
-      const {params} = paramMap;
-      idAlumno = params.id;
 
-     this.alumno = this.loginService.getUser().alumno;
+    this.alumno = this.loginService.getUser().alumno;
 
-     this.consultarCalificacionesAlumno(idAlumno);
+    let idAlumno: number = this.alumno.id;
 
-    })
+    this.storageCalificacion = sessionStorage.getItem('calificaciones');
+    this.calificaciones = JSON.parse(this.storageCalificacion);
+
+
+    if(this.calificaciones == null)  // if is the first time
+      this.consultarCalificacionesAlumno(idAlumno);
+
+    if(this.calificaciones != null)
+      this.mostrar = true;
     
 
   }
 
-  // consultarAlumnoPorId(idAlumno: number) {
-  //   this.alumnoService.consultarAlumnoPorID(idAlumno).subscribe( ResponseGC => {
-  //     this.alumno = ResponseGC.data;
-  //     this.nombre = this.alumno.nombre;
-  //     this.alumnoService.nombreUsuario = this.nombre;
-  //   },
-  //   error=>{console.error(error)}
-    
-  //   );
-
-    
-  // }
 
   consultarCalificacionesAlumno(idAlumno: number){
     this.calificacionService.buscarCalificacionAlumno(idAlumno).subscribe( ResponseGC => {
@@ -75,6 +68,9 @@ export class AlumnosDataComponent implements OnInit{
       
       
       this.mostrar = true;
+
+      
+      sessionStorage.setItem('calificaciones', JSON.stringify(this.calificaciones));
     },
     error =>{ console.error(error)}
     );

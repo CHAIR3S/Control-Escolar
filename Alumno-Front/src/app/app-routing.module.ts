@@ -2,29 +2,38 @@ import { LoginGuardian } from './Guadians/login-guardian.guard';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { NgModule, Component } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './Components/login/login.component';
-import { LoginService } from './services/Login/login.service';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
+
   {
-    path: 'init',
-    // canActivateChild: [LoginGuardian], // Protector de rutas por si no estas autenticado
-    component: SidebarComponent,
-    loadChildren: () => 
-      import('./Components/interface.module').then(m => m.InterfaceModule )
-  },
-  {
-    path: 'login',
-    component: LoginComponent
+    path: '',
+    component: AppComponent,
+    children:[
+      {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full'
+      },
+      {
+        path: 'init',
+        loadChildren: () => import('./Modules/sidebar/sidebar.module').then(m => m.SidebarModule)
+      },
+      {
+        path: 'login',
+        loadChildren: () => import('./Modules/login/login.module').then(m => m.LoginModule)
+      }
+    ]
   },
   {
     path: '**',
     redirectTo: 'login'
   }
+
 ];
 
 @NgModule({
-  providers: [LoginGuardian, LoginService, Router],
+  providers: [],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

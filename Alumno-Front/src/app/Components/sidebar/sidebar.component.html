@@ -15,21 +15,21 @@
     </div>
     <ul [ngClass]="this.alumnoService._res ? 'nav-list' : 'nav-list-active'">
         <li>
-            <a href="init/home/6">
+            <a routerLink="home/6">
                 <i class='bx bxs-home'></i>
                 <span class="links_name"> Inicio </span>
             </a>
             <span class="react"> Inicio </span>
         </li>
         <li *appRolPermission="'Administrador'">
-            <a href="init/admin">
+            <a routerLink="admin">
                 <i class='bx bx-chalkboard'></i>
                 <span class="links_name"> Administración </span>
             </a>
             <span class="react"> Administración </span>
         </li>
         <li>
-            <a href="init/profesores">
+            <a routerLink="profesores">
                 <i class='bx bx-clipboard'></i>
                 <span class="links_name"> Profesores </span>
             </a>
@@ -40,7 +40,9 @@
         <div class="profile">
             <div class="profile_details">
 
-                <img src="assets/Image mia.jpg" alt="">
+                <div class="image-user">
+                    <i class='bx bxs-user' ></i>
+                </div>
 
                 <div class="name_role">
                     <div *appRolPermission="'alumno'" class="name">
@@ -57,7 +59,7 @@
                         {{this.user.rol.rol}}
                     </div>
                 </div>
-                <a href="login">
+                <a routerLink="/login">
                     <i class='bx bx-log-out' id="logout" (click)="logout()"></i>
                 </a>
             </div>

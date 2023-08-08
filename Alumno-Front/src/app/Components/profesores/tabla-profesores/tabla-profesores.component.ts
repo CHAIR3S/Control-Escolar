@@ -1,5 +1,5 @@
 
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -13,12 +13,13 @@ import { ProMatGru } from 'src/app/model/ProMatGru';
   templateUrl: './tabla-profesores.component.html',
   styleUrls: ['./tabla-profesores.component.scss']
 })
-export class TablaProfesoresComponent{
+export class TablaProfesoresComponent implements OnInit{
 
   displayedColumns: string[] = ['id', 'profesor', 'materia', 'grupo'];
   arrayProMatGru: ProMatGru[] = new Array();
   arrayUserData: UserData[] = new Array();
   dataSource!: MatTableDataSource<UserData>;
+  storageProfesores: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -27,12 +28,25 @@ export class TablaProfesoresComponent{
     public proMatGruService: ProMatGruService
   ) {
 
-    this.consultarProfesores();
-
-    // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.arrayUserData);
-
     
+  }
+
+  ngOnInit(): void {
+
+    this.storageProfesores = sessionStorage.getItem('profesores');
+
+    if(this.storageProfesores != null){ // If profesores item exist in sessionStorage
+      this.arrayUserData = JSON.parse(this.storageProfesores);
+      this.dataSource = new MatTableDataSource(this.arrayUserData);
+      setTimeout( () => {this.dataSource.paginator = this.paginator;}, 5);
+    }
+
+
+    if(this.storageProfesores == null){
+      this.consultarProfesores();
+    } // if is the first time
+      
   }
 
   ngAfterViewInit() {
@@ -51,8 +65,11 @@ export class TablaProfesoresComponent{
   }
 
   consultarProfesores(){
+
     this.proMatGruService.consultarTodos().subscribe(ResponseGC => {
       this.arrayProMatGru = ResponseGC.list
+
+
 
       for(let i: number = 0; i<this.arrayProMatGru.length; i++){
         
@@ -83,11 +100,16 @@ export class TablaProfesoresComponent{
         this.arrayUserData.push(userData);
       }
 
+      sessionStorage.setItem('profesores', JSON.stringify(this.arrayUserData));
 
-      setTimeout( () => {this.dataSource.paginator = this.paginator;}, 5)
+
+      setTimeout( () => {this.dataSource.paginator = this.paginator;}, 5);
+      
       
     },
-    error =>{ console.error(error)})
+    error =>{ 
+      
+    })
     
   }
 }

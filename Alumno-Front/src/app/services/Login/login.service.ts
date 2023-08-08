@@ -87,6 +87,8 @@ export class LoginService {
 
     this.cookieService.delete('user', '/');
 
+    sessionStorage.clear();
+
     return true;
   }
 

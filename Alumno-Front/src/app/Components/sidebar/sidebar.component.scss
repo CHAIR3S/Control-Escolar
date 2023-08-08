@@ -208,12 +208,21 @@ ul li a i{
     pointer-events: none;
 }
 
-.profile_content .profile .profile_details img{
+.profile_content .profile .profile_details .image-user{
     height: 45px;
     width: 45px;
-    object-fit: cover;
+    // object-fit: cover;
     border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.profile_content .profile .profile_details .image-user i{
+    color: white;
+    font-size: 30px;
+}
+
 
 .profile .profile_details .name_role{
     margin-left: 10px;

@@ -2,56 +2,51 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LoginService } from '../services/Login/login.service';
+import { Location } from '@angular/common';
 
 @Injectable()
-export class LoginGuardian implements  CanActivateChild{
+export class LoginGuardian implements  CanActivateChild, CanActivate{
 
   constructor(
     private loginService: LoginService,
-    private router: Router
+    private location: Location
   ){}
 
 
-  // canActivate(): Observable<boolean|UrlTree>|Promise<boolean|UrlTree>|boolean|UrlTree {
-
-  //   return this.permission();
-  // }
+  canActivate(): Observable<boolean|UrlTree>|Promise<boolean|UrlTree>|boolean|UrlTree {
 
 
-
-  permission() {
-
-    if(!this.loginService.isLoggedIn() ){
-      window.location.assign("http://localhost:4200/login");
-
-      // this.router.navigate(['login']);
-
-
+    if(this.loginService.isLoggedIn()){
+      location.assign('/init/home');
       return false;
     }
 
-
     return true;
-
   }
+
 
   canActivateChild(
-    next: ActivatedRouteSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    route: ActivatedRouteSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
 
-      if(!this.permission()){
-        return false;
+      if(!this.loginService.isLoggedIn()){
+        location.assign('/init/home');
+        return false
       }
 
-      return this.rolPermission(next);
+      return this.rolPermission(route);
+      // return true;
   }
 
 
-  rolPermission(next: ActivatedRouteSnapshot){
-    const rolRoute = next.data['role']; // Obtener data de la ruta hija
-    const user = this.loginService.getUser();
+  rolPermission(route: ActivatedRouteSnapshot){
+    const rolRoute: string = route.data['role']; // Obtener data de la ruta hija
+    const userRol: string = this.loginService.getUser().authorities[0].authority;
+    
 
-    if (next.data['role'] && user.authorities[0].authority != rolRoute) {
+    if (route.data['role'] && userRol.toUpperCase() != rolRoute.toUpperCase()) {
+
+      this.location.back();
       
       return false;
     }

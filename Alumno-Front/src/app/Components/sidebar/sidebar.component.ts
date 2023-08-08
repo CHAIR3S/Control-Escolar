@@ -1,5 +1,5 @@
 import { AlumnoService } from 'src/app/services/Alumno/alumno.service';
-import { Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/services/Login/login.service';
 import { Login } from 'src/app/model/Login';
@@ -9,7 +9,7 @@ import { Login } from 'src/app/model/Login';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent implements OnInit{
+export class SidebarComponent {
   user: Login = new Login;
 
   constructor(
@@ -20,16 +20,11 @@ export class SidebarComponent implements OnInit{
 
       if(this.loginService.isLoggedIn())
         this.user = this.loginService.getUser();
-      else
-        this.router.navigate(['/login']);
+      // else
+      //   this.router.navigate(['/login']);
     }
 
 
-    ngOnInit(): void {
-        
-
-
-    }
 
     logout(){
       this.loginService.logout();
