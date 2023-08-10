@@ -137,6 +137,11 @@
     transition: all 0.5s ease;
 }
 
+ul li .routeActive{
+    color: purple;
+    background: rgb(255, 255, 255);
+    pointer-events: auto;
+}
 
 
 ul li a{
@@ -227,6 +232,16 @@ ul li a i{
 .profile .profile_details .name_role{
     margin-left: 10px;
 }
+
+.admin-name{
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    max-width: 10px;
+
+}
+
+
 
 .profile .profile_details .name_role .name{
     font-size: 17px;

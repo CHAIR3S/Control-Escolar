@@ -33,11 +33,15 @@ export class AlumnoService {
   snackBarMessage: string = '';
   loadAlumnos: boolean = false;
 
+  private delete: BehaviorSubject<number>;
+
   constructor(
     private http:HttpClient,
     private snackBar: MatSnackBar) {
     const storedData = localStorage.getItem('res');
     this._res = storedData ? JSON.parse(storedData) : true;
+
+    this.delete = new BehaviorSubject<number>(0);
   }
 
   abrirSnackBar(){ //funcion de snackBar angular material que muestra un componente por determinado tiempo
@@ -49,13 +53,15 @@ export class AlumnoService {
     localStorage.setItem('res', JSON.stringify(this._res));
   }
 
-  sendEvent(){
-    this.subject.next(event);
+  deleteAlumno() {
+    this.delete.next(this.idAlumno); // send signal to excecute function delete
   }
 
-  getEvent(): Observable<any>{
-    return this.subject.asObservable();
+  getAlumnoDelete() {
+    return this.delete.asObservable(); // to subscribe to observable
   }
+
+
 
   alumnoToArray(){
 

@@ -22,39 +22,25 @@ export class LoginComponent {
   constructor(
     private loginService: LoginService,
     private fb: FormBuilder,
-    private router: Router,
-    private alumnoService: AlumnoService,
-    private route: ActivatedRoute
+    private alumnoService: AlumnoService
   ){
 
 
     this.form = this.fb.group({
       correo: ['', Validators.email],
-      contraseña: ['']
+      contraseña: ['', Validators.required]
     })
+
 
 
     this.load = false;
     this.spinner = true;
 
 
-
-    // if(this.loginService.isLoggedIn()){
-
-    //   let id = this.loginService.getUser()
-
-    //   // this.load = true;
-      
-    //   this.router.navigate([`init/home/${id}`]);
-    // }
-
   }
 
   showHidePassword = () => {
     this.showPassword = !this.showPassword
-
-    // console.log(location.pathname.toString());
-    // console.log(this.router.url);
 
 
     switch(this.tipo){
@@ -69,51 +55,59 @@ export class LoginComponent {
 
   login() {
 
-    const creds: Credentials = new Credentials;
-    let id: number;
-    this.load = true;
+    if(this.form.valid){
+
+      const creds: Credentials = new Credentials;
+      this.load = true;
+
     
-    creds.correo = this.form.value.correo;
-    creds.contraseña = this.form.value.contraseña;
+      creds.correo = this.form.value.correo;
+      creds.contraseña = this.form.value.contraseña;
 
-    this.loginService.login(creds).subscribe(
-      (response) => {
-
-
-        
-        this.loginService.saveToken(response);
-
-        this.loginService.getCurrentUser().subscribe( 
-          (response) => {
-
-            this.loginService.saveUser(response.data);
-
-            this.spinner = false;
-
-            location.assign('/init/home');
+      this.loginService.login(creds).subscribe(
+        (response) => {
 
 
+          
+          this.loginService.saveToken(response);
+
+          this.loginService.getCurrentUser().subscribe( 
+            (response) => {
+
+              this.loginService.saveUser(response.data);
+
+              this.spinner = false;
+
+              location.assign('/init/home');
+
+
+          },
+          (error) => {
+
+            this.load = false;
+
+            this.alumnoService.snackBarMessage = 'Error al iniciar sesión';
+
+            this.alumnoService.abrirSnackBar();
+
+          });
+
+          
         },
         (error) => {
 
           this.load = false;
-
-          this.alumnoService.snackBarMessage = 'Error al iniciar sesión';
+          
+          this.alumnoService.snackBarMessage = 'Correo o contraseña incorrecta';
 
           this.alumnoService.abrirSnackBar();
+        }
+      );
+    }
+    else{
+      this.alumnoService.snackBarMessage = 'Formulario inválido';
 
-        });
-
-        
-      },
-      (error) => {
-
-        this.load = false;
-        
-        this.alumnoService.snackBarMessage = 'Correo o contraseña incorrecta';
-
-        this.alumnoService.abrirSnackBar();
-      }
-    );
+      this.alumnoService.abrirSnackBar();
+    }
   }
 }

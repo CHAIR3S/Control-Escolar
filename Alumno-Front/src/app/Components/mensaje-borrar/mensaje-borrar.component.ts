@@ -17,7 +17,7 @@ export class MensajeBorrarComponent {
   }
 
   sendEvent(){     //Se envia para ejecutar la accion de borrar
-    this.alumnoService.sendEvent(); 
+    this.alumnoService.deleteAlumno(); 
   }
 
 }

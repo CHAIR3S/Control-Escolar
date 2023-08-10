@@ -2,7 +2,7 @@ import { CalificacionService } from './../../services/Calificacion/calificacion.
 import { Alumno } from '../../model/Alumno';
 import { AlumnoService } from '../../services/Alumno/alumno.service'
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ResponseGC } from '../../model/ResponseGC';
 import { Calificacion } from 'src/app/model/Calificacion';
 import { LoginService } from 'src/app/services/Login/login.service';
@@ -15,26 +15,21 @@ import { LoginService } from 'src/app/services/Login/login.service';
 })
 export class AlumnosDataComponent implements OnInit{
 
+  @Input() 
+  alumno: Alumno = new Alumno;
+
   response: ResponseGC<Alumno> = new ResponseGC();
   calificaciones: Array <Calificacion> = new Array;
   storageCalificacion: any;
-  alumno: Alumno = new Alumno;
   nombre: String = '';
   mostrar: boolean = false;
-
-  public id: any;
 
 
   constructor(
     public alumnoService: AlumnoService,
-    private calificacionService: CalificacionService,
-    private loginService: LoginService) {
-
-     }
+    private calificacionService: CalificacionService) {}
 
   ngOnInit(): void {
-
-    this.alumno = this.loginService.getUser().alumno;
 
     let idAlumno: number = this.alumno.id;
 

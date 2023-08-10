@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Profesor } from 'src/app/model/Profesor';
 import { LoginService } from 'src/app/services/Login/login.service';
 
@@ -9,14 +9,13 @@ import { LoginService } from 'src/app/services/Login/login.service';
 })
 export class ProfesoresDataComponent implements OnInit {
 
-  constructor(
-    private loginService: LoginService){}
+  constructor(){}
 
+  @Input()
   profesor: Profesor = new Profesor;
 
   ngOnInit(): void {
 
-    this.profesor = this.loginService.getUser().profesor;
       
   }
   

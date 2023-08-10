@@ -15,21 +15,21 @@
     </div>
     <ul [ngClass]="this.alumnoService._res ? 'nav-list' : 'nav-list-active'">
         <li>
-            <a routerLink="home/6">
+            <a routerLink="home"  routerLinkActive="routeActive">
                 <i class='bx bxs-home'></i>
                 <span class="links_name"> Inicio </span>
             </a>
             <span class="react"> Inicio </span>
         </li>
         <li *appRolPermission="'Administrador'">
-            <a routerLink="admin">
+            <a routerLink="admin"  routerLinkActive="routeActive">
                 <i class='bx bx-chalkboard'></i>
                 <span class="links_name"> Administración </span>
             </a>
             <span class="react"> Administración </span>
         </li>
         <li>
-            <a routerLink="profesores">
+            <a routerLink="profesores" routerLinkActive="routeActive">
                 <i class='bx bx-clipboard'></i>
                 <span class="links_name"> Profesores </span>
             </a>
@@ -51,7 +51,7 @@
                     <div *appRolPermission="'profesor'" class="name">
                         <span>{{this.user.profesor.nombre}}</span>
                     </div>
-                    <div *appRolPermission="'administrador'" class="name">
+                    <div *appRolPermission="'administrador'" class="admin-name">
                         <span>{{this.user.correo}}</span>
                     </div>
 

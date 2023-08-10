@@ -1,6 +1,8 @@
 
-<app-alumnos-data *appRolPermission="'alumno'"/>
+<h2>Bienvenido {{user.authorities[0].authority}}</h2>
 
-<app-profesores-data *appRolPermission="'profesor'"/>
+<app-alumnos-data *appRolPermission="'alumno'" [alumno]="user.alumno"/>
+
+<app-profesores-data *appRolPermission="'profesor'" [profesor]="user.profesor"/>
 
 <app-admin-data *appRolPermission="'administrador'"></app-admin-data>

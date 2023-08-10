@@ -30,7 +30,7 @@ export class LoginGuardian implements  CanActivateChild, CanActivate{
 
 
       if(!this.loginService.isLoggedIn()){
-        location.assign('/init/home');
+        location.assign('/login');
         return false
       }
 
@@ -46,7 +46,7 @@ export class LoginGuardian implements  CanActivateChild, CanActivate{
 
     if (route.data['role'] && userRol.toUpperCase() != rolRoute.toUpperCase()) {
 
-      this.location.back();
+      location.assign('/init/home');
       
       return false;
     }

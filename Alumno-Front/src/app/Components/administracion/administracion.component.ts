@@ -12,13 +12,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AlumnoData } from 'src/app/model/AlumnoData';
 import { GrupoService } from 'src/app/services/Grupo/grupo.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-administracion',
   templateUrl: './administracion.component.html',
   styleUrls: ['./administracion.component.scss'],
 })
-export class AdministracionComponent implements OnInit{
+export class AdministracionComponent implements OnInit, OnDestroy{
   displayedColumns: string[] = [
     'expediente',
     'alumno',
@@ -28,6 +29,9 @@ export class AdministracionComponent implements OnInit{
   ];
   load: boolean = false
   idUsuario: number = 0;
+  contador: number = 0;
+  suscripcion: any; 
+
   
   dataSource!: MatTableDataSource<AlumnoData>;
   
@@ -44,9 +48,6 @@ export class AdministracionComponent implements OnInit{
 
     this.dataSource = new MatTableDataSource(this.alumnoService.alumnoArray);
 
-    this.alumnoService.getEvent().subscribe(() => {
-      this.aceptarBorrarAlumnoDialog()
-    });
 
     this.form = this.fb.group({
       expediente: [''],
@@ -58,6 +59,18 @@ export class AdministracionComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
+    this.contador = 0;
+
+    this.suscripcion = this.alumnoService.getAlumnoDelete().subscribe( id => {
+
+      if(this.contador > 0){
+        this.idUsuario = id;
+        this.aceptarBorrarAlumnoDialog();
+      }
+  
+      this.contador++;
+    });
     
     if(this.grupoService.grupos.length == 0)
         this.consultarGrupos();
@@ -69,6 +82,13 @@ export class AdministracionComponent implements OnInit{
     }
 
   }
+
+  ngOnDestroy(): void {
+
+    this.suscripcion.unsubscribe(); // Eliminar suscripcion a eliminar alumno
+      
+  }
+
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -97,7 +117,6 @@ export class AdministracionComponent implements OnInit{
          
        },
        (error) => {
-         console.error(error);
 
          this.alumnoService.snackBarMessage = 'No pudo borrarse el alumno';
 
@@ -150,7 +169,7 @@ export class AdministracionComponent implements OnInit{
 
     this.alumnoService.dialog = true;
     
-    this.idUsuario = id;
+    this.alumnoService.idAlumno = id;
   }
 
   consultarAlumno(){

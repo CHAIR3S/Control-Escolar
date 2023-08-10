@@ -107,8 +107,6 @@ export class EditComponent{
       if(this.update){
 
         this.actualizar(alumno);
-        this.alumnoService.alumnoToArray();
-        this.router.navigate(['init/admin']);
         
       }
       else
@@ -129,11 +127,15 @@ export class EditComponent{
 
       this.alumnoService.actualizarAlumno(actualiceAlumno).subscribe( ResponseGC => {
 
+        this.alumnoService.alumnoToArray();
+
         this.actualizarArreglo(this.alumnoAct);
 
         this.alumnoService.snackBarMessage = 'Alumno actualizado correctamente';
 
         this.alumnoService.abrirSnackBar();
+
+        this.router.navigate(['init/admin']);
 
 
       },
@@ -144,6 +146,9 @@ export class EditComponent{
 
         this.alumnoService.abrirSnackBar();
 
+        this.router.navigate(['init/admin']);
+
+
       });
 
 
@@ -153,7 +158,8 @@ export class EditComponent{
 
       this.alumnoService.guardarAlumno(alumno).subscribe( ResponseGC => {
 
-        this.alumnoService.loadAlumnos = true;
+        if(this.alumnoService.arrayAlumnos.length > 1)
+          this.alumnoService.loadAlumnos = true;
 
         this.alumnoService.snackBarMessage = 'Alumno guardado correctamente';
 
@@ -164,7 +170,6 @@ export class EditComponent{
       
       },
       (error) => {
-        console.error(error);
 
         this.alumnoService.snackBarMessage = 'No pudo guardarse alumno';
 
@@ -202,7 +207,8 @@ export class EditComponent{
         }
         else
         {
-          this.alumnoService.arrayAlumnos.push(alumno);
+          if(this.alumnoService.arrayAlumnos.length > 1)
+            this.alumnoService.arrayAlumnos.push(alumno);
         }
 
         this.alumnoService.alumnoToArray();
